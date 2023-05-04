@@ -1,5 +1,7 @@
 package cat.itacademy.barcelonactiva.invernon.mateo.ariadna.s04.model.domain;
 
+import jakarta.persistence.Column;
+
 //import javax.persistence.*; error
 
 import jakarta.persistence.Entity;
@@ -12,9 +14,9 @@ public class Fruita {
     
     @Id
     private int id;
-    
+    @Column (name="nom")
     private String nom;
-    
+    @Column (name="quantitatQuilos")
     private int quantitatQuilos;
     
 
