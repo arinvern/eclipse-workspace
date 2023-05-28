@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Actualizar Sucursal</title>
+</head>
+<body>
+    <h1>Actualizar Sucursal</h1>
+    <form th:action="@{/actualizarSucursal/{id}(id=${sucursal.pk_SucursalID})}" method="post" th:object="${sucursal}">
+        <div>
+            <label>ID:</label>
+            <input type="text" th:field="*{pk_SucursalID}" readonly="readonly" />
+        </div>
+        <div>
+            <label>Nombre:</label>
+            <input type="text" th:field="*{nomSucursal}" />
+        </div>
+        <div>
+            <label>País:</label>
+            <input type="text" th:field="*{paisSucursal}" />
+        </div>
+        <button type="submit">Actualizar</button>
+    </form>
+</body>
+</html>

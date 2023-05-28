@@ -8,28 +8,36 @@ import java.util.List;
 public class SucursalDTO extends Sucursal {
 
 	private String tipoSucursal;
-	private static final List<String> paisos = Arrays.asList("Alemanya", "Bèlgica", "Croàcia", "Dinamarca", "Espanya",
-			"França", "Irlanda", "Letònia", "Luxemburg", "Països Baixos", "Suècia", "Bulgària", "Eslovàquia", "Estònia",
-			"Grècia", "Malta", "Polònia", "República Txeca", "Àustria", "Xipre", "Eslovènia", "Finlàndia", "Hongria",
-			"Itàlia", "Lituània", "Portugal", "Romania");
+	private static final List<String> paises = Arrays.asList("Alemania", "Belgica", "Croacia", "Dinamarca", "España",
+			"Francia", "Irlanda", "Letonia", "Luxemburgo", "Paises Bajos", "Suecia", "Bulgaria", "Eslovaquia", "Estonia",
+			"Grecia", "Malta", "Polonia", "República Checa", "Austria", "Chipre", "Eslovenia", "Finlandia", "Hungria",
+			"Italia", "Lituania", "Portugal", "Rumania");
 
 	public SucursalDTO() {
 	}
 
-	public SucursalDTO(String nomSucursal, String paisSucursal, String tipoSucursal) {
-		super(nomSucursal, paisSucursal);
-		this.tipoSucursal = tipoSucursal;
+	public SucursalDTO(String nombreSucursal, String paisSucursal) {
+	    super(nombreSucursal, paisSucursal);
+	    asignarTipoSucursal(paisSucursal);
 	}
 
-	public String getTipusSucursal() {
+	public String getTipoSucursal() {
 		return tipoSucursal;
 	}
 
-	public void setTipusSucursal(String tipoSucursal) {
+	public void setTipoSucursal(String tipoSucursal) {
 		this.tipoSucursal = tipoSucursal;
 	}
 
-	public static List<String> getPaïsos() {
-		return paisos;
+	public static List<String> getPaises() {
+		return paises;
+	}
+	
+	public void asignarTipoSucursal(String pais) {
+	    if (paises.contains(pais)) {
+	        tipoSucursal = "UE";
+	    } else {
+	        tipoSucursal = "Fuera UE";
+	    }
 	}
 }

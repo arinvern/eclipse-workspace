@@ -12,6 +12,7 @@ import cat.itacademy.barcelonactiva.invernon.mateo.ariadna.s05.t01.n01.model.ser
 import java.util.List;
 
 @Controller
+@RequestMapping("/sucursal")
 public class SucursalController {
 
     private final SucursalServices sucursalService;
@@ -21,35 +22,44 @@ public class SucursalController {
         this.sucursalService = sucursalService;
     }
 
-    @GetMapping("/sucursales")
+    @GetMapping("/getAll")
     public String listarSucursales(Model model) {
         List<Sucursal> sucursales = sucursalService.obtenerTodasLasSucursales();
         model.addAttribute("sucursales", sucursales);
         return "listarSucursales";
     }
 
-    @PostMapping("/sucursales")
+    @PostMapping("/add")
     public String crearSucursal(@ModelAttribute("sucursal") SucursalDTO sucursalDto) {
         sucursalService.crearSucursal(sucursalDto);
-        return "redirect:/sucursales";
+        return "redirect:/sucursal/getAll";
     }
 
-    @GetMapping("/sucursales/{id}")
+    @GetMapping("/update/{id}")
     public String mostrarFormularioEditarSucursal(@PathVariable Integer id, Model model) {
         SucursalDTO sucursalDto = sucursalService.obtenerSucursalPorId(id);
         model.addAttribute("sucursal", sucursalDto);
         return "formularioEditarSucursal";
     }
 
-    @PutMapping("/sucursales/{id}")
+    @PutMapping("/update/{id}")
     public String actualizarSucursal(@PathVariable Integer id, @ModelAttribute("sucursal") SucursalDTO sucursalDto) {
         sucursalService.actualizarSucursal(id, sucursalDto);
         return "redirect:/sucursales";
     }
+  
 
-    @DeleteMapping("/sucursales/{id}")
+    @DeleteMapping("/delete/{id}")
     public String eliminarSucursal(@PathVariable Integer id) {
         sucursalService.eliminarSucursal(id);
         return "redirect:/sucursales";
     }
-}
+    
+    @GetMapping("/getOne/{id}")
+    public String obtenerSucursal(@PathVariable Integer id, Model model) {
+        SucursalDTO sucursalDto = sucursalService.obtenerSucursalPorId(id);
+        model.addAttribute("sucursal", sucursalDto);
+        return "detalleSucursal";
+    }
+    
+   }
