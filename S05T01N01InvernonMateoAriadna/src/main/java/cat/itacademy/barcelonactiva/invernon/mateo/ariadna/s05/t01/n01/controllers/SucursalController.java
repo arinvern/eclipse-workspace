@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import cat.itacademy.barcelonactiva.invernon.mateo.ariadna.s05.t01.n01.model.domain.Sucursal;
 import cat.itacademy.barcelonactiva.invernon.mateo.ariadna.s05.t01.n01.model.dto.SucursalDTO;
 import cat.itacademy.barcelonactiva.invernon.mateo.ariadna.s05.t01.n01.model.services.SucursalServices;
+import jakarta.transaction.Transactional;
+
 import java.util.List;
 
 @Controller
@@ -29,9 +31,16 @@ public class SucursalController {
         return "listarSucursales";
     }
 
+    
     @PostMapping("/add")
-    public String crearSucursal(@ModelAttribute("sucursal") SucursalDTO sucursalDto) {
-        sucursalService.crearSucursal(sucursalDto);
+    public String crearSucursal(@ModelAttribute("sucursalDTO") SucursalDTO sucursalDto) {
+        Sucursal sucursal = new Sucursal();
+        sucursal.setNombreSucursal(sucursalDto.getNombreSucursal());
+        sucursal.setPaisSucursal(sucursalDto.getPaisSucursal()); 
+
+        sucursalDto.asignarTipoSucursal(sucursalDto.getPaisSucursal());
+
+        sucursalService.crearSucursal(sucursal);
         return "redirect:/sucursal/getAll";
     }
 
@@ -44,17 +53,19 @@ public class SucursalController {
 
     @PutMapping("/update/{id}")
     public String actualizarSucursal(@PathVariable Integer id, @ModelAttribute("sucursal") SucursalDTO sucursalDto) {
-        sucursalService.actualizarSucursal(id, sucursalDto);
-        return "redirect:/sucursales";
+        Sucursal sucursal = sucursalService.obtenerSucursalPorId(id);
+        sucursalService.actualizarSucursalDesdeDto(sucursal, sucursalDto);
+        sucursalService.actualizarSucursal(sucursal);
+        return "redirect:/sucursal/getAll";
     }
-  
 
     @DeleteMapping("/delete/{id}")
     public String eliminarSucursal(@PathVariable Integer id) {
         sucursalService.eliminarSucursal(id);
-        return "redirect:/sucursales";
+        return "redirect:/sucursal/getAll";
     }
     
+     
     @GetMapping("/getOne/{id}")
     public String obtenerSucursal(@PathVariable Integer id, Model model) {
         SucursalDTO sucursalDto = sucursalService.obtenerSucursalPorId(id);

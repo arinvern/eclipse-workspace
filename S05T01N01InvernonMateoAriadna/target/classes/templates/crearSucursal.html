@@ -5,14 +5,14 @@
 </head>
 <body>
     <h1>Crear Sucursal</h1>
-    <form th:action="@{/sucursales/add}" method="post" th:object="${sucursal}">
+    <form th:action="@{/sucursales/add}" method="post" th:object="${sucursalDTO}">
         <div>
             <label>ID:</label>
-            <input type="text" th:field="*{pk_SucursalID}" />
+            <input type="number" th:field="*{pk_SucursalID}" />
         </div>
         <div>
             <label>Nombre:</label>
-            <input type="text" th:field="*{nomSucursal}" />
+            <input type="text" th:field="*{nombreSucursal}" />
         </div>
         <div>
             <label>País:</label>

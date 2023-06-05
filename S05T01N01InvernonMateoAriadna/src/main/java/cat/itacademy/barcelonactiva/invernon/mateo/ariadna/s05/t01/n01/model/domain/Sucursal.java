@@ -13,20 +13,20 @@ public class Sucursal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     
-    @Column(name = "pk_SucursalID")
+    @Column(name = "pk_SucursalID", columnDefinition = "VARCHAR(20) DEFAULT 'ValorPredeterminado'")
     private Integer pk_SucursalID;
     
-    @Column(name = "nombreSucursal")
+    @Column(name = "nombreSucursal", columnDefinition = "VARCHAR(45) DEFAULT 'ValorPredeterminado'")
     private String nombreSucursal;
     
-    @Column(name = "paisSucursal")
+    @Column(name = "paisSucursal", columnDefinition = "VARCHAR(20) DEFAULT 'ValorPredeterminado'")
     private String paisSucursal;
 
     public Sucursal() {
     }
 
-    public Sucursal(String nomSucursal, String paisSucursal) {
-        this.nombreSucursal = nomSucursal;
+    public Sucursal(String nombreSucursal, String paisSucursal) {
+        this.nombreSucursal = nombreSucursal;
         this.paisSucursal = paisSucursal;
     }
 
@@ -38,12 +38,12 @@ public class Sucursal {
         this.pk_SucursalID = pk_SucursalID;
     }
 
-    public String getNomSucursal() {
+    public String getNombreSucursal() {
         return nombreSucursal;
     }
 
-    public void setNomSucursal(String nomSucursal) {
-        this.nombreSucursal = nomSucursal;
+    public void setNombreSucursal(String nombreSucursal) {
+        this.nombreSucursal = nombreSucursal;
     }
 
     public String getPaisSucursal() {

@@ -35,9 +35,9 @@ public class SucursalDTO extends Sucursal {
 	
 	public void asignarTipoSucursal(String pais) {
 	    if (paises.contains(pais)) {
-	        tipoSucursal = "UE";
+	        this.tipoSucursal = "UE";
 	    } else {
-	        tipoSucursal = "Fuera UE";
+	        this.tipoSucursal = "Fuera UE";
 	    }
 	}
 }
